@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #4169E1 75%, #FFD700 25%);
+}
+
+.logo {
+    margin-bottom: 20px; /* Add space below the logo */
+}
+
+.logo-image {
+    width: 60px; /* Adjust as needed */
+    height: auto;
+}
