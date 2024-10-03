@@ -2,8 +2,28 @@
         
     <h2 class="login-title">SIGN IN</h2>
     <form class="login-form" id="login-form">
-        <input type="text" class="input-field" placeholder="Username" id="username">
-        <input type="password" class="input-field" placeholder="Password" id="password">
+        <input 
+            type="text"
+            class="input-field" 
+            placeholder="Username" 
+            id="username"
+            formControlName="username"
+            [ngClass]="{ 'is-invalid': submitted && f.username.invalid }"
+            />
+            <div *ngIf="submitted && f.password.errors" class="error">
+                <span>Username is required</span>
+            </div>
+        <input 
+            type="password" 
+            class="input-field" 
+            placeholder="Password" 
+            id="password"
+            formControlName="password"
+            [ngClass]="{ 'is-invalid': submitted && f.password.invalid}"
+            >
+            <div *ngIf="submitted && f.password.errors" class="error">
+                <span>Password is required</span>
+            </div>
         <button type="submit" class="login-button">LOG IN</button>
     </form>
 </div>
