@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup , FormControl, AbstractControl} from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { UserCredentialsInterface } from '../user';
 
 @Component({
   selector: 'app-login-form',
@@ -9,11 +10,34 @@ import { Router } from '@angular/router';
 })
 export class LoginFormComponent implements OnInit {
 
-  loginForm!: FormGroup;
+  loginForm: FormGroup;
 
   submitted = false;
-  loginSuccess = false;
-  userData = {};
+  loginSuccess = false
+  userExists = true
+  userData: UserCredentialsInterface = {
+    username: '',
+    password: ''
+  };
+
+  users: UserCredentialsInterface[] = [
+    {
+      username: 'Alice',
+      password: '123Alice'
+    },
+    {
+      username: 'Bob',
+      password: '123Bob'
+    },
+    {
+      username: 'Charlie',
+      password: '123Charlie'
+    },
+    {
+      username: 'Dave',
+      password: '123Dave'
+    }
+  ]
 
   constructor(private formBuilder: FormBuilder, private router: Router) {
     this.loginForm = this.formBuilder.group({
@@ -38,18 +62,29 @@ export class LoginFormComponent implements OnInit {
       return;
     }
 
-    this.loginSuccess = true;
-
     this.userData = {
       username: this.loginForm.value.username,
       password: this.loginForm.value.password
     };
+    
 
-    console.log(`User Data: ${this.userData}`)
+    const user = this.users.find(user => user.username === this.userData.username && user.password === this.userData.password);
+   
+    if (typeof user !== 'undefined') {
+      this.loginSuccess = true;
+      setTimeout(() => {
+        this.router.navigate(['/dashboard']);
+      }, 2000);
+      return this.userData;
+    }
+    else {
+      this.userExists = false;
+      return;
+    }
+    
 
-    setTimeout(() => {
-      this.router.navigate(['/dashboard']);
-    }, 2000);
+    
+    
 
   }
 

@@ -1,7 +1,7 @@
 <div class="login-box">
         
     <h2 class="login-title">SIGN IN</h2>
-    <form class="login-form" id="login-form">
+    <form class="login-form" id="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <input 
             type="text"
             class="input-field" 
@@ -10,7 +10,7 @@
             formControlName="username"
             [ngClass]="{ 'is-invalid': submitted && f.username.invalid }"
             />
-            <div *ngIf="submitted && f.password.errors" class="error">
+            <div *ngIf="submitted && f.username.errors" class="error">
                 <span>Username is required</span>
             </div>
         <input 
@@ -26,4 +26,11 @@
             </div>
         <button type="submit" class="login-button">LOG IN</button>
     </form>
+
+    <div *ngIf="loginSuccess" class="success-message">
+        <p>Login successful! Redirecting to dashboard...</p>
+    </div>
+    <div *ngIf="!userExists" class="not-found-message">
+        <p>invalid username or password</p>
+    </div>
 </div>

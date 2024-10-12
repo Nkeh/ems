@@ -7,7 +7,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    title: string = "Welcome to Employee Management Software";
+    title: string = "Employee Management Software";
 
     constructor() {
     }
